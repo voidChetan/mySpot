@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-primary btn-sm" (click)="openModel()">Add Building</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3" *ngFor="let item of gridData">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{item.buildingName}}</h5>
+                <p class="card-text">{{item.isActive ? 'Active': 'In-Active'}}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <a (click)="onEdit(item)" class="btn btn-primary">Edit</a>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a  (click)="onDelete(item.buildingId)" class="btn btn-primary ml-2">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Building Name</label>
+                            <input type="text" name="buildingName" [(ngModel)]="buildingObj.buildingName"
+                                class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Status </label>
+                            <input type="checkbox" name="isActive" [(ngModel)]="buildingObj.isActive" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()"
+                    data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" *ngIf="buildingObj.buildingId ==0" data-bs-dismiss="modal" (click)="save()">Save</button>
+                <button type="button" class="btn btn-success" *ngIf="buildingObj.buildingId !== 0" (click)="update()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
